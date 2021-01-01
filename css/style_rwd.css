@@ -1,0 +1,221 @@
+/* ⼩型設備(⼩型平板電腦和⼤型⼿手機，767px及以下)*/
+@media only screen and (max-width:767px) {
+    .service_display,#news article:nth-child(2),#news article:last-child,footer .menu{ 
+        display: none;
+    }
+      /* #news article:nth-child(2),   = news裡的article第2個孩子消失 ()裡為第幾個 */
+      /* #news article:last-child{ }   = news裡的article最後一個孩子消失 last-child最後一個孩子*/
+      /* footer .menu  = 手機版的footer消失 */
+
+    #news article:nth-last-child(-n+2){
+        display: none;
+    }
+    /* TOP區 */
+    .logo{
+        top: 20px;
+        left: 10px;
+    }
+    header .icon{
+        top: 20px;
+        right: 10px;
+    }
+    header .menu{ /* 設定跟兒子一樣寬度  寬100px 就會變直的*/
+        width: 100px;
+        top: 180px;
+        right: 10px;
+    }
+    .menu a{
+        text-align: right; /* 靠右對齊 */
+    }
+    .menu a:hover{
+        border: none;
+        background-color: transparent;  /* background-color沒有none，要用transparent透明 */
+    }
+    .name{
+        top: 60%;
+        /* left: 10px; */
+    }
+    @keyframes name{
+        from{
+            left: -144px;
+            opacity: 0;
+        }
+        to{
+            left: 10px;
+            opacity: 1;
+        }
+    }
+    .name h2{
+        font-size: 2rem;
+    }
+    .name h3{
+        font-size: 1.2rem;
+    }
+    .banner{
+        width: 80%;
+    }
+    /* section共用區 */
+    section h2{
+        width: 70%;
+        font-size: 1.8rem;
+        margin: 1.2rem auto;
+        padding-top: 1rem;
+    }
+    .list_item{
+        width: 100%; /* 強迫寬100% 這樣就會撐開往下排 */
+        margin: 0 0 .6rem; /* 上 左右 下 */
+    }
+    /* service區 */
+    figure.list_item {
+        height: 162px;
+        overflow: hidden;
+        border-radius: 20px; /* radius圓角 寫數值時要順時鐘寫  */ /* 只有一個數值就是上下左右都一起是那個數值 */
+    }
+    figure img{ /* 左邊框框裡面的圖片*/
+        width: 160%;
+        position: absolute;/* 跟.service_img 裡的 position: relative; 做定位*/
+        /*left: -30%;  160%/2=80%-50%= -30% */
+        left: 50%; /* 跑到父元素區塊50%的位置 */
+        top: 0;
+        transform:translateX(-50%); /* 減掉子元素自身50%的位置 */
+    }
+    .service_img{ /* 左邊圖片的框框 */
+        position: relative;/* 讓figure img 裡的 position: absolute; 跟我定位 */
+        float: left;
+        width: 45%;
+        height: 162px;
+        margin-right: 5%;
+        overflow: hidden;
+    }
+    .service_text{ /* 右邊內容文字的框框 */
+        float: left;
+        width: 50%;
+    }
+    .list_item figcaption{ /* 右邊框框裡面的service字樣*/
+        font-size: 1.3rem;
+        padding: .5rem 0;
+    }
+    .list_item p{ /* 右邊框框裡面的小字 */
+        font-size: .9rem;
+        line-height: 1.2rem;
+        margin: -.5rem auto 1rem; /* 0上 auto左右 1rem下 */
+    }
+    figure p{
+        -webkit-line-clamp: 2; /* 指定行數 */ 
+    }
+    figure a{ /* more按鈕 */
+        width: 80px; /* 按鈕寬度 */
+        margin: -.5rem auto ;
+        padding: 4px 0; /* 內距 邊框離more的距離 */
+    }
+    /* ABOUT區 */
+    .about_box{
+        width: 90%;
+        padding: 0 20px;
+        margin: 0 5%;  /* 讓他置中 */ /* 110-90=10 10/2=5 左右各5，寫auto會無效，因為float: right; 的關係 */
+    }
+    /* VIDEO區 */
+    #video{
+        height: auto; /* 要覆蓋section裡的 height: 100vh; */ /* auto自動自動偵撤高度 */
+        padding-bottom: 5rem;
+    }
+    #video video{
+        width: 80%;
+    }
+    /* CONTACT區 */
+    #contact_form{
+        width: 70%;
+    }
+    
+    /* footer區 */
+    footer .logo{
+        width: 50px;
+    }
+    footer small{
+        top: 20px;
+        left: 100px;
+        /* width: 80%; */
+    }
+}
+
+/*中型設備(中型平板電腦，768px及以上)*/
+@media only screen and (min-width:768px) {
+    /* TOP區 */
+    .banner{
+        width: 65%;
+    }
+    .menu a{
+        width: 85px;
+    }
+    #news article:last-child{ /* news裡的article最後一個孩子消失 last-child最後一個孩子*/
+        display: none;
+    }
+    #service .list_item{
+        width: 30.3333%;
+    }
+    #news .list_item{
+        width: 47%; /* margin左右各1.5%*2=3%,50%-3%=47% */
+    }
+    /* VIDEO區 */
+    #video{
+        height: auto;
+        padding-bottom: 5rem;
+    }
+    #video video{
+        width: 80%;
+    }
+    /* ABOUT區 */
+    .about_box{
+        width: 80%; /* 寬80+下面左右各10＝100 */
+        padding: 0 30px;
+        margin: 0 10%; /* 寫auto會無效，因為float: right; 的關係 */ /* 要覆蓋前面的平板所以要再寫一次 */
+    }
+    /* CONTACT區 */
+    #contact{
+        height: auto;
+        padding-bottom: 5rem;  /*利用內距，展開下面的空間 */
+    }
+    #contact_form{
+        width: 60%;
+    }
+}
+
+/*大型設備(筆記型電腦/桌機，992px及以上)*/
+@media only screen and (min-width:992px) {
+    .service_display{
+        display: none;
+    }
+    #news article:last-child{ /* news裡的article最後一個孩子消失 last-child最後一個孩子*/
+        display: block; /* 這邊要再寫一次讓他回來顯示三個圖片，因為手機跟平板都是display: none; */
+    }
+    /* TOP區 */
+    .menu a{
+        width: 100px;
+    }
+    .banner{
+        width: 40%;
+    }
+    #news .list_item{
+        width: 30.33333%;
+    }
+    /* ABOUT區 */
+    .about_box{
+        width: 55%;
+        padding: 0 60px;
+        margin: 0;
+    }
+    #video{
+        height: 100vh;
+    }
+    #video video{
+        height: 70vh;
+        width: auto;
+    }
+     /* CONTACT區 */
+     #contact{
+        height: 100vh; /* 覆蓋section裡的 height: 100vh; */
+    }
+    #contact_form{
+        width: 40%;
+    }
+}

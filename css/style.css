@@ -1,0 +1,460 @@
+@charset "UTF-8"; /* 複製旁邊的html，前面加上小老鼠，中間的＝改成空格，後面再加分號 */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Noto+Sans+TC:wght@100;400&family=Open+Sans&display=swap'); /* ( google font )要放在第2個位置不然會壞掉，只允許"UTF-8"在他上面 */
+@font-face{ /* (網路字體沒有限制要放在哪，但放再一起比較清楚，把小老鼠的東西一起放在上面 */
+    font-family: TaipeiSansTC;
+    src: url(../font/TaipeiSansTC.ttf);
+}* {
+    margin: 0;
+    padding: 0; /* 取消所有元素預設的內外距 */
+    box-sizing: border-box;  /* 這行一定要記得寫 */ /* 不累加邊框與內距 但間距還是會累加 */
+}
+body{
+    font-family: Helvetica,Arial,'Noto Sans TC','Heiti TC','黑體-繁','微軟正黑體','Microsoft JhengHei',sans-serif;
+    color: #444;
+}
+
+img{
+    width: 100%;
+    display: block; /* 取消inline-block預設間距，要設定不然下面會有間距 */
+}
+header,#news,#contact{
+    background-color: #d2dde5; /* 怕跟其他人共用到 所以要用background-color */
+}
+
+/* 滑動至置頂 */
+#gotop{
+    display: none; /* 一開始叫他消失 等到大於200時淡入 小於200時淡出，一開始先不用寫最後在寫就好，不然會看不到  在html裡 if( $(this).scrollTop() > 200 ){ */
+    width: 50px;
+    height: 50px;
+    background: hsla(330, 75%, 76%, 0.698);
+    position: fixed; /* 固定定位 */
+    bottom: 20px;
+    right: 20px;
+    padding: 6px;
+    cursor: pointer; /* 滑鼠滑過去會出現小手 */
+}
+
+/* HEADER區 */
+header{
+    position: relative; /* relative相對定位 1.我是爸爸一定要設定！要讓兒子以我為定位  2.要讓下面的人往下排(兄弟)*/
+    height: 100vh;
+    /* background: #d2dde5; */ /* 植物後面的背景顏色 */
+    border: solid 25px #fff;  /* 四周白白的邊框 */
+     /* background: #d2dde5; */ /* 移去上面header,#news,#contact的地方 */
+    overflow: hidden; /* 超過就隱藏 不然border會被蓋掉 */
+}
+header video{
+    display: block;
+    width: 130%;
+}
+.bg{
+    position: absolute; /* header 有 position: relative */
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(180, 215, 212, 0.8); /* 背景半透明霧霧的 */
+}
+.logo{  /* 左邊的LOGO  */ /* 沒有階層可共用 */
+    width: 74px;
+    position: absolute; /* absolute絕對定位 我是兒子 要跟header裡面的position: relative;以他為定位 */
+    top: 40px; /* 以heade為主  邊框以內離上面40  (不用算邊框)  */
+    /* left: 40px; */ /* 以header為主  邊框以內離右邊40  (不用算邊框)  */
+    animation: logo 2s both; /* 2s=2秒  both＝到最後一個步驟  forwards=停留在最後一個步驟*/
+}
+@keyframes logo{
+
+    from{
+        left: -74px; /* logo寬度是74 所以至少要74以上 要用負的 -74 */
+        opacity: 0; /* 透明度0 */
+    }
+    to{
+        left: 30px; /* 從left:-74px 到右邊 left:30px，要記得把.logo 的left:40px刪掉 不然會吃到40px;*/
+        opacity: 1; /* 透明度100% */  /*   */
+}
+
+}
+header .icon{ /*  nav裡面 右上方的3個icon  */
+    position: absolute; /* absolute絕對定位 我是兒子 要跟header裡面的position: relative;以他為定位 */
+    top: 40px; /* 以heade為主  邊框以內離上面40  (不用算邊框)  */
+    /* right: 40px;  *//* 以header為主  邊框以內離右邊40  (不用算邊框)  */
+    z-index: 1;
+    animation: icon 3s 1s both; /* 3s=3秒 1s=延遲1秒  both＝到最後一個步驟  forwards=停留在最後一個步驟*/
+} 
+@keyframes icon{
+    from{
+        right: -135px;
+        opacity: 0;
+    }
+    to{
+        right: 40px;
+        opacity: 1;
+    }
+}
+header .menu{ /*  nav裡面 右下方的連結 */
+    position: absolute; /* absolute絕對定位 我是兒子 要跟header裡面的position: relative;以他為定位 */
+    top: 100px; /* 以heade為主 離上面100 因為上面還有icon 所以要在下面一點 */
+    /* right: 40px; */ /* 以header為依據定位 */
+    z-index: 1;
+    animation: icon 3s 2s both;  /* 3s=3秒 2s=延遲2秒  both＝到最後一個步驟  forwards=一開始元素寫在起點本身要讓他停留在最後*/
+}
+@keyframes icon{
+    from{
+        right: -600px;
+        opacity: 0;
+    }
+    to{
+        right: 40px;
+        opacity: 1;
+    }
+}
+
+/* 導覽列共用語法  ！！要記起來！！ */
+nav ul{
+    list-style-type: none;  /* 取消項目清單符號「點號」樣式 */
+}
+nav li{
+    display: block; /* 修改li預設list-item */
+    float: left; /* 使區塊併排 */
+}
+nav a{
+    display: block;
+}
+/* 導覽列各別樣式 */
+.icon li{
+    margin-left: 10px;
+}
+.menu a{
+    /* width: 100px; */
+    height: 35px;
+    line-height: 35px;  /* 行高設定與高度相同即可垂直置中 */
+    text-align: center;
+    color: #666;  /* 修改超連結預設的顏色 */
+    text-decoration: none;  /* 不要文字的裝飾底線 */
+    border: solid 1px transparent; /* transparent透明度 */ /* 讓他不會動不然少掉這一行會輕微的移動 */
+}
+.menu a:hover{ /* 滑鼠滑過去會出現的效果 */
+    border: solid 1px #444;
+    background-color: #fff;
+    opacity: .5; /* 透明度 裡面所有設定都會變半透明*/
+    color: teal; /* 給他一點顏色 原本顏色變半透明會不清楚 加顏色會清楚一點 */
+}
+/* 網站名稱 */
+.name{
+    position: absolute; /* absolute絕對定位 我是兒子 要跟header裡面的position: relative;以他為定位 */
+    top: 45%; /* 相對位子,在整體偏中間 不能用px會變固定在那 */
+    /* left: 20%; */ /*  相對位子, 在整體偏左邊 不能用px會變固定在那 */
+    /* border: solid 2px hsl(141, 16%, 42%); */ /* 邊框顏色 */
+    /* padding: 10px; */ /* 邊框往內縮 */
+    animation: name 3s 3s both; /* 3s=3秒 3s=延遲3秒  both＝到最後一個步驟  forwards=一開始元素寫在起點本身要讓他停留在最後 */
+}@keyframes name{
+    from{
+        left: -208px;
+        opacity: 0;
+    }
+    to{
+        left: 20%;
+        opacity: 1;
+    }
+}
+.name h2{
+    font-size: 3rem; /* 文字大小要用rem */
+    color:#027127;
+    letter-spacing: .3rem; /* 字距 = 0.2rem */
+    border-bottom: solid 8px #027127; /* 下面的邊框 */
+    padding-bottom: 1rem; /* 邊框以內下往上推 */
+    padding-left: .2rem; /* 強迫芮塔溫室往後 */
+}
+.name h3{
+    font-size: 1.6rem; /* 文字大小要用rem */
+    text-align: center; /* 文字置中 */
+    margin-top: 1rem;/* 邊框跟邊框互推 */
+     /* color: #027127; */
+    /* letter-spacing: .1rem; */ /* 字距 = 0.1rem */
+}
+.banner{
+    /* width: 40%; */ /* 這邊不寫是因為平板跟桌機板有寫了 *//*  佔裝他的容器40% 他的容器是img width: 100% img要設定寬度才會有*/
+    position: absolute;
+    bottom: 0;
+    right: -520px;
+    animation: banner 3s 3s forwards; /* 3s=3秒 3s=延遲3秒  both＝到最後一個步驟  forwards=一開始元素寫在起點本身要讓他停留在最後 */
+}
+@keyframes banner{
+    from{
+        opacity: 0;
+    }
+    to{
+        right: 0;
+        opacity: 1;
+    }
+}
+/* 主要內容共用區 */
+section{
+    /* overflow: hidden; */ /* margin塌陷，可在父層設定overflow: hidden */
+    position: relative; /* 要讓後面的 SERVICE，NEWS，ABOUT，VIDEO，CONTACT可以跟著他定位*/
+    width: 100%; /* 因為有float: left 他會橫的排列，為了讓他往下排列，所以要再給他一個寬度100% */
+    height: 100vh; /* vh */
+    float: left; /* 原本的寬度是display給的100%，所以要再給他一個寬度100% */
+}
+section h2{
+    font-family: 'Lora',sans-serif; /* 最後要再加上sans-serif */ /* 後面一定要再加上sans-serif這樣他字體找不到就會帶入sans-serif這個字體 */
+    width: 30%;
+    margin: 2rem auto; /* 所有區塊左右置中，只要區域有給寬度就會依據寬度左右置中*/
+    border-top: solid 10px #666; /* 線向上 */
+    text-align:center; /* 文字置中 */
+    font-size: 2.3rem; /* 字體大小 */
+    letter-spacing: .3rem; /* 字句 */
+    padding-top: 2rem; /* 字跟上面的邊框讓他有點距離 */
+}
+section hr{
+    width: 160px; /* 給他固定尺寸才不會縮放 */
+    position: absolute; /* 跟著section的position: relative定位*/
+    left: calc(50% - 80px);  /* calc計算，減號的前後一定要空格 ， 不同單位的計算！物件置中需減去寬度一半 50%-(12%/2) ， section的寬度是 12％的一半＝６  */
+    bottom: 25px; /* 離下面25像素 */
+    border: solid 5px #888;
+    border-radius: 20px;
+}
+/* SERVICE區 */
+#service{  /* 要用＃號 因為html用id設定*/
+    background-color:lightgrey;
+}
+.list_box{
+    width: 90%; /* 為了讓裡面的區塊不要貼在左右邊 */
+    margin: 0 5% 20px; /* 100%-90%=10% 10%除2=5%  依照兒子的寬度*/ /* 上 左右 下 */
+    float: left;  /* section有設定 */
+}
+.list_item{
+    /* width: 30.333%; */ /* 寬度100%除3=33.333 但因為margin左右各有1.5所以要在減3*/
+    float: left; /* 並排 */
+    margin: 0 1.5%; /* 間距左右：1.5%*2=3% */
+    box-shadow: 2px 2px 10px #999; /* box-shadow 陰影   x  y  模糊  顏色  */
+    border-radius: 0px 0px 20px 20px; /* radius圓角 寫數值時要順時鐘寫  */
+}
+.list_item figcaption{
+    font-family: 'Open Sans',sans-serif; /* 最後要再加上sans-serif */ /* 後面一定要再加上sans-serif這樣他字體找不到就會帶入sans-serif這個字體 */
+    width: 80%;
+    font-size: 1.6rem;
+    text-align: center; /* 文字置中 */
+    border-bottom: solid 2px #888;
+    padding: 1rem 0;/* 上下給間距 左右不要 */
+    margin: 0 auto 1rem; /* 上、左右、下 */
+    
+}
+.list_item p{
+    font-family: 'Noto Sans TC',sans-serif; /* 後面一定要再加上sans-serif這樣他字體找不到就會帶入sans-serif這個字體 */
+    width: 80%;
+    /* padding-top: 1rem;  */ /* 強迫往下移動一點點 */
+    margin: 0 auto 1rem; /* 0上 auto左右 1rem下 */
+    line-height: 1.5rem; /* 設定字體範圍高度（行間距） */
+}
+figure p{ /* figure是標籤本人 所以前面不用加點 */
+    /* 多行文本溢出省略 */
+    -webkit-line-clamp: 3; /* 指定行數 */
+    overflow: hidden; /* 區塊溢出:隱藏 */
+    text-overflow: ellipsis; /* 文字溢出:省略號 */
+    display: -webkit-box;/* 彈性佈局容器 */
+    -webkit-box-orient: vertical; /* 區塊佈局方向:垂直 */
+}
+figure a{
+    display: block;/* 往下排列 */
+    width: 100px; /* 按鈕寬度 */
+    margin: 0 auto 1rem; /* 讓按鈕跟上面的文字 下面的框 有點距離 */
+    padding: 5px 0; /* 內距 邊框離more的距離 */
+    border: solid 1px #666; /* 按鈕邊框 */
+    border-radius: 8px; /* 圓角 */
+    text-align: center; /* 文字置中 */
+    text-decoration: none; /* 底線拿掉 */
+    color: #333; /* 字的顏色 */
+}
+figure a:hover{ /* more 滑鼠滑過去會出現的樣式 */
+    background-color: rgba(127, 192, 160, 0.5); /* more 滑鼠滑過去會出現的顏色 */
+}
+
+/* NEWS區 */
+.list_box article{ /* list_box 裡面的 article，要給背景一個尺寸才可以被撐開 */
+    height: 65vh; /* 要用vh */
+    background-position: center; /* 依照定位讓背景裡面的東西置中 news_pt1,news_pt2,news_pt3 這樣就不用一張一張去定位*//* 背景定位：置中(只設一個值時(默認為x)，y軸預設為置中) */
+    background-size:cover; /* 最常用的！ 短邊100%，長邊自動剪裁 */
+    position: relative;
+    overflow: hidden; /* 超過就隱藏 原本黑色部分有尖角 加了這個就變圓角了 */
+    /* background-size:contain; 一定要出現整張完整的圖，不足的地方會用圖片補齊，這樣看起來會怪怪的。 所以有設定contain就要設定no-repeat*/
+    /* background-repeat: no-repeat; 圖片不要重複 */
+}
+.news_item{ /* new裡面黑黑的那一塊 */
+    width: 100%;
+    position: absolute; /* 跟著list_box article裡的position: relative; 定位*/
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .4); /* rgb顏色 a透明度 .4＝40% */
+}
+.news_item h3{
+    font-family: 'Open Sans',sans-serif; /* 最後要再加上sans-serif */
+    width: 80%;
+    margin: 1rem auto; /* 讓他置中 width: 80%;  所以上下間距1rem 左右 auto*/
+    font-size: 1.5rem;
+    color: rgb(216, 216, 216);
+}
+.news_item p{
+    color: rgb(216, 216, 216);
+    /* 單行文本溢出省略 */
+    overflow: hidden; /* 區塊溢出:隱藏 */
+    text-overflow: ellipsis; /* 文字溢出:省略號 */
+    white-space: nowrap; /* 文字不自動換行 */
+}
+.news_item a{
+    text-decoration: none; /* 不要文字底線 */
+}
+.news_item a:hover{
+    text-decoration: underline; /* 滑鼠移到文字要出現底線 */
+    color: #fff; /* 滑鼠滑到文字會出現白色底線 */
+}
+.news_pt1{
+    background-image: url(../images/pt_news1.jpg);
+}
+.news_pt2{
+    background-image: url(../images/pt_news2.jpg);
+}
+.news_pt3{
+    background-image: url(../images/pt_news3.jpg);
+}
+
+/* ABOUT區 */
+#about{  /* 要用＃號 因為html用id設定*/
+    /* position: relative; */
+    background-image: url(../images/pt_about.jpg);
+    background-size: cover; /* 最常用的！ 短邊100%，長邊自動剪裁，不會repeat但contain會有 */ 
+    background-attachment: fixed;/* baat快捷 鎖死在現在的區塊 不跟著捲軸移動*/
+}
+.about_box{
+    position: relative;  /* 讓線跑來定位 */
+    float: right; /* 白色框框靠右 */
+   /*  width: 55%; */ /* 白色框框寬度55% */
+    height: 100vh; /* 白色框框高度100vh */
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 0 60px; /* about往內推 與about_box之間的內距 */
+    /* 內容文字(P)與ABOUT(h2)的距離 之前在section h2 裡有設定margin: 3rem auto; 所以才會有間距*/
+}
+.about_box p{
+    font-family: TaipeiSansTC; /* 帶入網路字體，最上面也要寫這邊才會成功 */
+    line-height: 1.3rem; /* 行距 */
+    letter-spacing: .1rem; /* 文字間距 */
+    overflow: auto; /* 讓他有捲軸，前提是要給高度才會出現捲軸 */
+    height: 65vh; /* 捲軸文字那邊顯示的範圍 */
+}
+
+/* VIDEO區 */
+#video{  /* 要用＃號 因為html用id設定*/
+    background-color: #dee2de;
+}
+#video video{ /* 給#video video一個層級，這樣才不會跟上面的header video打架 */
+    display: block; /* 要給一個區塊margin才能給撐開 */
+   /*  height: 65vh; */  /* css原本的設定寬度會爆掉所以設定高度，但在rwd裡會怪怪的所以這邊高度移到rwd裡  */ /* 要寫在css裡 這樣才能偵測不同螢幕要用什麼尺寸 */
+    margin: 0 auto; /* 讓他置中 */ /* 要用margin時，必須給個區塊display: block; */
+}
+
+/* CONTACT區 */
+#contact_form{  /* 要用＃號 因為html用id設定*/
+    /* width: 40%; */
+    margin: 0 auto; /* 讓他置中 */ /* m0-a */
+}
+#contact_form *{ /* 讓contact_form 裡面全部所有的元素都讓他一起變 */
+    width: 100%;
+}
+#contact_form input{
+    height: 30px;
+    padding: 5px; /* 內距 文字跟邊框的距離 */
+    color: rgba(22, 76, 167, 0.6);
+    font-size: 1rem;
+    border: solid 1px rgba(22, 76, 167, 0.6); /* 邊框顏色 */
+    margin-bottom: 1rem; /* 原本太靠近 讓他有點間距 */
+}
+textarea{ /* 多行表單內容 */
+    color: rgba(22, 76, 167, 0.6); /* 留言區裡字的顏色 */
+    border: solid 1px rgba(22, 76, 167, 0.6); /* 留言區裡邊寬的顏色  */
+}
+
+/* BUTTON區 */
+button {
+    position: relative;
+    outline: none;
+    text-decoration: none;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    height: 60px;
+    width: 210px!important; /* (權重最重)不管其他的排列順序 !important 要變成藍色才正確 盡量不要用! */
+    margin: 1rem auto; /* 讓他置中 */
+    opacity: 1;
+    background-color: #ffffff;
+    border: 1px solid rgba(22, 76, 167, 0.6);
+  }
+  button span {
+    color: #164ca7;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.7px;
+  }
+  button:hover {
+    animation: rotate 0.7s ease-in-out both;
+  }
+  button:hover span {
+    animation: storm 0.7s ease-in-out both;
+    animation-delay: 0.06s;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+    25% {
+      transform: rotate(3deg) translate3d(0, 0, 0);
+    }
+    50% {
+      transform: rotate(-3deg) translate3d(0, 0, 0);
+    }
+    75% {
+      transform: rotate(1deg) translate3d(0, 0, 0);
+    }
+    100% {
+      transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+  }
+  @keyframes storm {
+    0% {
+      transform: translate3d(0, 0, 0) translateZ(0);
+    }
+    25% {
+      transform: translate3d(4px, 0, 0) translateZ(0);
+    }
+    50% {
+      transform: translate3d(-3px, 0, 0) translateZ(0);
+    }
+    75% {
+      transform: translate3d(2px, 0, 0) translateZ(0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) translateZ(0);
+    }
+  }
+
+  main,footer{
+    float: left;
+  }
+
+  /* footer區 */
+  footer{
+      position: relative; /* 讓 logo、menu、small 可以跟著自己定位，但因為前面的logo已經有設定共用了，所以這邊不用設定 */
+      width: 100%; /* 要展開到100% 下面的top right 才會跟著跑 */
+      height: 150px;
+  }
+  footer .menu{
+      position: absolute;
+      top: 40px;
+      right: 90px;
+  }
+  footer small{
+      position: absolute;
+      top: 100px;
+      right: 100px;
+  }
